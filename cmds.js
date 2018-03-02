@@ -174,7 +174,7 @@ exports.playCmd = rl => {
 
 exports.creditsCmd = rl => {
     log('Autor de la práctica:');
-    log('Álvaro Vidal Alegría.', 'green');
+    log('ALVARO', 'green');
     rl.prompt();
 };
 
