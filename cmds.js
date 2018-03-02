@@ -129,7 +129,7 @@ exports.testCmd = (rl, id) => {
     rl.prompt();
 
 };
-
+/**
 exports.playCmd = rl => {
     let score = 0;
     let toBeResolved = [quiz.count()];
@@ -171,7 +171,7 @@ exports.playCmd = rl => {
 
 
 };
-
+*/
 exports.creditsCmd = rl => {
     log('Autor de la práctica:');
     log('ALVARO', 'green');
