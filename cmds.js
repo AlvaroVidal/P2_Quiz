@@ -114,7 +114,7 @@ exports.testCmd = (rl, id) => {
         try{
             const quiz = model.getByIndex(id);
             rl.question(` ${quiz.question}: `, answer => {
-                if (answer === quiz.answer) {
+                if (answer.toLowerCase().trim() === quiz.answer.toLowerCase()) {
                     biglog('CORRECTO', 'green');
                 } else {
                     biglog('INCORRECTO', 'red');
@@ -124,34 +124,33 @@ exports.testCmd = (rl, id) => {
 
         } catch (error) {
             errorlog(error.message);
+            rl.prompt();
         }
     }
-    rl.prompt();
-
 };
-/**
+
 exports.playCmd = rl => {
     let score = 0;
-    let toBeResolved = [quiz.count()];
-    for(x=0; x< toBeResolved.length; x++) {
+    let toBeResolved = [model.count()];
+    for(x=0; x< model.count(); x++) {
 
-        toBeResolved[0] = questions.getByIndex(x);
+        toBeResolved[x] = x;
     }
     const playOne = () => {
 
-        if (toBeResolved === []) {
+        if (toBeResolved.length === 0) {
             log(` Ya no quedan más preguntas.`);
             log(' Su resultados es: ');
-            biglog(` ${score}`, 'yellow');
+            biglog(score, 'yellow');
             rl.prompt();
         } else {
-            let id = Math.random() * toBeResolved.length;
-            toBeResolved.splice[id, 1];
-
-            let quiz = model.getByIndex(id);
+            let id = Math.round(Math.random() * (toBeResolved.length-1));
+            let id_2 = toBeResolved[id];
+            toBeResolved.splice(id, 1);
+            let quiz = model.getByIndex(id_2);
             rl.question(` ${quiz.question}: `, answer => {
-                if (answer === quiz.answer) {
-                    score+1;
+                if (answer.toLowerCase().trim() === quiz.answer.toLowerCase()) {
+                    score++;
                     log(` ${colorize('CORRECTO', 'green')}`);
                     log(` Lleva ${score} aciertos.`);
                     playOne();
@@ -161,7 +160,7 @@ exports.playCmd = rl => {
                     biglog(` ${score}`, 'yellow');
                     rl.prompt();
                 }
-            })
+            });
 
         }
     };
@@ -171,7 +170,7 @@ exports.playCmd = rl => {
 
 
 };
-*/
+
 exports.creditsCmd = rl => {
     log('Autor de la práctica:');
     log('ALVARO', 'green');
