@@ -115,8 +115,10 @@ exports.testCmd = (rl, id) => {
             const quiz = model.getByIndex(id);
             rl.question(` ${quiz.question}: `, answer => {
                 if (answer.toLowerCase().trim() === quiz.answer.toLowerCase()) {
+                    log(`Respuesta correcta.`)
                     biglog('CORRECTO', 'green');
                 } else {
+                    log('Respuesta incorrecta.')
                     biglog('INCORRECTO', 'red');
                 }
             rl.prompt();
@@ -156,7 +158,7 @@ exports.playCmd = rl => {
                     playOne();
                 } else {
                     log(` ${colorize('INCORRECTO', 'red')}`);
-                    log(` Su resultado es: `);
+                    log(` Fin del juego, su resultado es: `);
                     biglog(` ${score}`, 'yellow');
                     rl.prompt();
                 }
